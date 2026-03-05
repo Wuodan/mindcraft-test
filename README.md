@@ -1,4 +1,4 @@
-# mindcraft-test
+# Mindcraft-Test
 
 Small user-focused demo setup for [Mindcraft](https://github.com/mindcraft-bots/mindcraft):
 - Minecraft server in Docker ([PaperMC](https://papermc.io/) + [Dynmap plugin](https://www.curseforge.com/minecraft/bukkit-plugins/dynmap))
@@ -14,7 +14,7 @@ Small user-focused demo setup for [Mindcraft](https://github.com/mindcraft-bots/
    ```
    
    > **Hotfix**  
-   > While [mindcraft issue #728](https://github.com/mindcraft-bots/mindcraft/issues/728) is still open, use this in the `.env` file:
+   > While [Mindcraft issue #728](https://github.com/mindcraft-bots/mindcraft/issues/728) is still open, use this in the `.env` file:
    > ```text
    > MINDCRAFT_REPO=https://github.com/Wuodan/mindcraft.git
    > MINDCRAFT_REF=fix/728-docker-apply-patches
