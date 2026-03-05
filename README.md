@@ -57,6 +57,26 @@ Small user-focused demo setup for [Mindcraft](https://github.com/mindcraft-bots/
      docker compose -f docker-compose.yml -f docker-compose.amd.yml up -d
      ```
 
+## First Start Is Slow (Expected)
+
+The first startup can take several minutes because:
+
+- Ollama downloads model files into `ollama-data` (often multiple GB)
+- Minecraft creates initial server/world data in `minecraft-data`
+- Docker builds the bots image the first time
+
+You can watch progress with:
+
+```shell
+docker compose logs -f
+```
+
+You can check Docker disk usage with:
+
+```shell
+docker system df -v
+```
+
 ## Optional `.env` changes
 
 Most users can keep `.env` unchanged.
