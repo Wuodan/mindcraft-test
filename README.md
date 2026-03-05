@@ -139,6 +139,7 @@ Permissions note for non-admin users:
 
 - Edit profiles in `profiles/` (currently `bot_1.json`, `bot_2.json`).
 - Add/remove profiles by updating `SETTINGS_JSON.profiles` in `docker-compose.yml`.
+- For hardware-specific model selection help, see [`MODEL_SELECTION_PROMPT_GUIDE.md`](MODEL_SELECTION_PROMPT_GUIDE.md).
 - Upstream model/profile format reference:
   - `https://github.com/mindcraft-bots/mindcraft?tab=readme-ov-file#model-specifications`
   - `https://github.com/mindcraft-bots/mindcraft?tab=readme-ov-file#model-customization`
