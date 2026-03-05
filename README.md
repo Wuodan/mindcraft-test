@@ -56,3 +56,21 @@ Upstream default settings:
 
 This repo overrides selected values via `SETTINGS_JSON` in `docker-compose.yml`.
 Extend that JSON object to override more settings (for example `max_messages`, `num_examples`, `init_message`).
+
+## Cleanup
+
+```bash
+# Stop and remove project containers + network
+docker compose down
+
+# Also remove project volumes.
+# WARNING: this deletes Minecraft world data AND Ollama model data.
+# Next startup will need to re-download models (can take a long time).
+docker compose down -v
+
+# Remove local project image
+docker image rm mindcraft-bot:local
+
+# Optional: clean Docker build cache
+docker builder prune -f
+```
