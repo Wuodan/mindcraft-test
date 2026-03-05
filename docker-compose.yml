@@ -1,0 +1,61 @@
+services:
+  minecraft:
+    image: itzg/minecraft-server@sha256:cce41161e946a6a34ee6993b093bf3ed9a3942bd6b2fcf24d9d2797941884b4e
+    environment:
+      EULA: "TRUE"
+      TYPE: PAPER
+      VERSION: "1.21.6"
+      ONLINE_MODE: "FALSE"
+      SERVER_PORT: "55916"
+      PLUGINS: "https://www.curseforge.com/api/v1/mods/31620/files/7460127/download"
+    volumes:
+      - minecraft-data:/data
+      - ./minecraft-config/bukkit.yml:/data/bukkit.yml
+      - ./minecraft-config/ops.json:/data/ops.json
+    ports:
+      - "55916:55916"
+      - "8123:8123"
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+
+  bots:
+    build:
+      context: .
+      args:
+        MINDCRAFT_REPO: ${MINDCRAFT_REPO:-https://github.com/mindcraft-bots/mindcraft.git}
+        MINDCRAFT_REF: ${MINDCRAFT_REF:-develop}
+    image: mindcraft-bot:local
+    depends_on:
+      minecraft:
+        condition: service_healthy
+    restart: unless-stopped
+    environment:
+      OPENROUTER_API_KEY: "${OPENROUTER_API_KEY}"
+      SETTINGS_JSON: |
+        {
+          "host": "minecraft",
+          "port": 55916,
+          "auto_open_ui": false,
+          "profiles": [
+            "./profiles/bot_or_1.json",
+            "./profiles/bot_or_2.json",
+            "./profiles/bot_or_3.json",
+            "./profiles/bot_or_4.json",
+            "./profiles/bot_or_5.json"
+          ],
+          "init_message": "Immediately start autonomous goal mode by calling !goal(...) for this objective: obtain and equip a full diamond armor set (diamond_helmet, diamond_chestplate, diamond_leggings, diamond_boots) and one diamond_sword for yourself as fast as possible while continuously managing your own survival and well-being (health, safety, food, and shelter as needed). You may choose any intermediate strategy, including storing items and subgoals. Keep working until complete. When complete, send exactly TASK_DONE_DIAMOND_KIT in chat, then call !endGoal.",
+          "allow_insecure_coding": true,
+          "chat_bot_messages": true,
+          "log_all_prompts": true
+        }
+    volumes:
+      - ./settings.js:/app/settings.js
+      - ./keys.json:/app/keys.json
+      - ./profiles:/app/profiles
+      - ./bots:/app/bots
+    ports:
+      - "8080:8080"
+
+volumes:
+  minecraft-data:
