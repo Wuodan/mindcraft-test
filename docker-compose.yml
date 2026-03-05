@@ -51,7 +51,9 @@ services:
           ollama list >/dev/null 2>&1 && break
           sleep 2
         done
+        ollama show qwen3:8b >/dev/null 2>&1 || ollama pull qwen3:8b
         ollama show qwen2.5-coder:7b >/dev/null 2>&1 || ollama pull qwen2.5-coder:7b
+        ollama show embeddinggemma >/dev/null 2>&1 || ollama pull embeddinggemma
 
   bots:
     build:
@@ -76,7 +78,7 @@ services:
           "profiles": [
             "./profiles/bot_or_1.json"
           ],
-          "init_message": "Immediately start autonomous goal mode by calling !goal(...) for this objective: obtain and equip a full diamond armor set (diamond_helmet, diamond_chestplate, diamond_leggings, diamond_boots) and one diamond_sword for yourself as fast as possible while continuously managing your own survival and well-being (health, safety, food, and shelter as needed). You may choose any intermediate strategy, including storing items and subgoals. Keep working until complete. When complete, send exactly TASK_DONE_DIAMOND_KIT in chat, then call !endGoal.",
+          "init_message": "Immediately start autonomous goal mode with !goal(...) for this objective: obtain and equip a full diamond armor set (diamond_helmet, diamond_chestplate, diamond_leggings, diamond_boots) and one diamond_sword as fast as possible while staying alive. Use staged progression: gather wood/cobblestone -> stone tools -> iron tools and shield -> mine diamonds -> craft and equip full diamond armor and one diamond_sword. Do NOT output TASK_DONE_DIAMOND_KIT and do NOT call !endGoal until you have actually equipped all four diamond armor pieces and have a diamond_sword ready.",
           "allow_insecure_coding": true,
           "chat_bot_messages": true,
           "log_all_prompts": true
@@ -84,9 +86,7 @@ services:
     volumes:
       - ./keys.json:/app/keys.json
       - ./bots/bot_or_1:/app/bots/bot_or_1
-      - ./bots/bot_or_2:/app/bots/bot_or_2
       - ./profiles/bot_or_1.json:/app/profiles/bot_or_1.json
-      - ./profiles/bot_or_2.json:/app/profiles/bot_or_2.json
     ports:
       - "8080:8080"
 
