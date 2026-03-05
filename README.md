@@ -33,6 +33,8 @@ Small user-focused demo setup for [Mindcraft](https://github.com/mindcraft-bots/
 
 Most users can keep `.env` unchanged.
 
+- Minecraft admin usernames:
+  - set `OPS` (comma-separated), for example `OPS=DeKuen` or `OPS=DeKuen,OtherUser`
 - Linux only, if your user is not `1000:1000`:
   - set `BOT_UID` and `BOT_GID` to your actual ids (`id -u`, `id -g`)
 - If you want another upstream source/branch for image build:

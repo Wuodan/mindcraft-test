@@ -6,12 +6,12 @@ services:
       TYPE: PAPER
       VERSION: "1.21.6"
       ONLINE_MODE: "FALSE"
+      OPS: "${OPS:-}"
       SERVER_PORT: "55916"
       PLUGINS: "https://www.curseforge.com/api/v1/mods/31620/files/7460127/download"
     volumes:
       - minecraft-data:/data
       - ./minecraft-config/bukkit.yml:/data/bukkit.yml
-      - ./minecraft-config/ops.json:/data/ops.json
     ports:
       - "55916:55916"
       - "8123:8123"
