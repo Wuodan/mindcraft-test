@@ -51,9 +51,10 @@ services:
           ollama list >/dev/null 2>&1 && break
           sleep 2
         done
-        ollama show qwen3:8b >/dev/null 2>&1 || ollama pull qwen3:8b
-        ollama show qwen2.5-coder:7b >/dev/null 2>&1 || ollama pull qwen2.5-coder:7b
-        ollama show embeddinggemma >/dev/null 2>&1 || ollama pull embeddinggemma
+        MODELS="qwen3:8b qwen2.5-coder:7b embeddinggemma"
+        for model in $$MODELS; do
+          ollama show "$$model" >/dev/null 2>&1 || ollama pull "$$model"
+        done
 
   bots:
     build:
