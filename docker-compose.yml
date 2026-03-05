@@ -78,8 +78,8 @@ services:
           "port": ${MC_SERVER_PORT:-55916},
           "auto_open_ui": false,
           "profiles": [
-            "./profiles/bot_or_1.json",
-            "./profiles/bot_or_2.json"
+            "./profiles/bot_1.json",
+            "./profiles/bot_2.json"
           ],
           "init_message": "${INIT_MESSAGE:-Start autonomous goal mode: obtain and equip full diamond armor and one diamond sword while staying alive. Prioritize survival and sustainability: keep food available, avoid low-health risks, and maintain a safe base with storage. Suggested progression: basic tools -> iron tools/armor and shield -> diamond mining -> craft/equip full diamond kit. Only end the goal when full diamond armor is equipped and a diamond sword is ready.}",
           "chat_ingame": true,
@@ -89,10 +89,10 @@ services:
           "log_all_prompts": true
         }
     volumes:
-      - ./bots/bot_or_1:/app/bots/bot_or_1
-      - ./bots/bot_or_2:/app/bots/bot_or_2
-      - ./profiles/bot_or_1.json:/app/profiles/bot_or_1.json
-      - ./profiles/bot_or_2.json:/app/profiles/bot_or_2.json
+      - ./bots/bot_1:/app/bots/bot_1
+      - ./bots/bot_2:/app/bots/bot_2
+      - ./profiles/bot_1.json:/app/profiles/bot_1.json
+      - ./profiles/bot_2.json:/app/profiles/bot_2.json
     ports:
       - "${MINDCRAFT_UI_PORT:-18080}:8080"
 

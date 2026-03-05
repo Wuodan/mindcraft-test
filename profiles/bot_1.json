@@ -1,5 +1,5 @@
 {
-    "name": "bot_or_2",
+    "name": "bot_1",
     "model": {
         "api": "ollama",
         "model": "Sweaterdog/Andy-4:latest",

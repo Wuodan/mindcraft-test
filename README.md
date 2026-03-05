@@ -34,13 +34,6 @@ Small user-focused demo setup for [Mindcraft](https://github.com/mindcraft-bots/
    ```shell
    cp .env.example .env
    ```
-   
-   > **Hotfix**  
-   > While [Mindcraft issue #728](https://github.com/mindcraft-bots/mindcraft/issues/728) is still open, use this in the `.env` file:
-   > ```text
-   > MINDCRAFT_REPO=https://github.com/Wuodan/mindcraft.git
-   > MINDCRAFT_REF=fix/728-docker-apply-patches
-   > ```
 
 2. Start (pick one):
   
@@ -112,7 +105,7 @@ docker compose exec minecraft rcon-cli op <your_minecraft_username>
 
 ## Customize Bots
 
-- Edit profiles in `profiles/` (currently `bot_or_1.json`, `bot_or_2.json`).
+- Edit profiles in `profiles/` (currently `bot_1.json`, `bot_2.json`).
 - Add/remove profiles by updating `SETTINGS_JSON.profiles` in `docker-compose.yml`.
 - Upstream model/profile format reference:
   - `https://github.com/mindcraft-bots/mindcraft?tab=readme-ov-file#model-specifications`
