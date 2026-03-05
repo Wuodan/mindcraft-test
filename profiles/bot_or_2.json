@@ -1,4 +1,8 @@
 {
     "name": "bot_or_2",
-    "model": "openrouter/stepfun/step-3.5-flash:free"
+    "model": {
+        "api": "ollama",
+        "model": "qwen2.5-coder:7b",
+        "url": "http://ollama:11434"
+    }
 }

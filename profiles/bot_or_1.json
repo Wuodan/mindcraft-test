@@ -1,4 +1,8 @@
 {
     "name": "bot_or_1",
-    "model": "openrouter/openrouter/free"
+    "model": {
+        "api": "ollama",
+        "model": "qwen2.5-coder:7b",
+        "url": "http://ollama:11434"
+    }
 }

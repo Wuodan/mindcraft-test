@@ -19,6 +19,28 @@ services:
     tty: true
     restart: unless-stopped
 
+  ollama:
+    image: ollama/ollama:latest
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    command:
+      - /bin/sh
+      - -lc
+      - |
+        ollama serve &
+        until ollama list >/dev/null 2>&1; do sleep 1; done
+        ollama show qwen2.5-coder:7b >/dev/null 2>&1 || ollama pull qwen2.5-coder:7b
+        wait
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 15s
+      timeout: 10s
+      retries: 20
+      start_period: 20s
+
   bots:
     build:
       context: ${MINDCRAFT_REPO:-https://github.com/mindcraft-bots/mindcraft.git}#${MINDCRAFT_REF:-develop}
@@ -27,9 +49,10 @@ services:
     depends_on:
       minecraft:
         condition: service_healthy
+      ollama:
+        condition: service_healthy
     restart: unless-stopped
     environment:
-      OPENROUTER_API_KEY: "${OPENROUTER_API_KEY}"
       SETTINGS_JSON: |
         {
           "host": "minecraft",
@@ -37,10 +60,7 @@ services:
           "auto_open_ui": false,
           "profiles": [
             "./profiles/bot_or_1.json",
-            "./profiles/bot_or_2.json",
-            "./profiles/bot_or_3.json",
-            "./profiles/bot_or_4.json",
-            "./profiles/bot_or_5.json"
+            "./profiles/bot_or_2.json"
           ],
           "init_message": "Immediately start autonomous goal mode by calling !goal(...) for this objective: obtain and equip a full diamond armor set (diamond_helmet, diamond_chestplate, diamond_leggings, diamond_boots) and one diamond_sword for yourself as fast as possible while continuously managing your own survival and well-being (health, safety, food, and shelter as needed). You may choose any intermediate strategy, including storing items and subgoals. Keep working until complete. When complete, send exactly TASK_DONE_DIAMOND_KIT in chat, then call !endGoal.",
           "allow_insecure_coding": true,
@@ -51,16 +71,11 @@ services:
       - ./keys.json:/app/keys.json
       - ./bots/bot_or_1:/app/bots/bot_or_1
       - ./bots/bot_or_2:/app/bots/bot_or_2
-      - ./bots/bot_or_3:/app/bots/bot_or_3
-      - ./bots/bot_or_4:/app/bots/bot_or_4
-      - ./bots/bot_or_5:/app/bots/bot_or_5
       - ./profiles/bot_or_1.json:/app/profiles/bot_or_1.json
       - ./profiles/bot_or_2.json:/app/profiles/bot_or_2.json
-      - ./profiles/bot_or_3.json:/app/profiles/bot_or_3.json
-      - ./profiles/bot_or_4.json:/app/profiles/bot_or_4.json
-      - ./profiles/bot_or_5.json:/app/profiles/bot_or_5.json
     ports:
       - "8080:8080"
 
 volumes:
   minecraft-data:
+  ollama-data:
