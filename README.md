@@ -87,8 +87,6 @@ docker system df -v
 
 Most users can keep `.env` unchanged.
 
-- Minecraft admin usernames:
-  - set `OPS` (comma-separated), for example `OPS=DeKuen` or `OPS=DeKuen,OtherUser`
 - Host ports (if defaults are already in use):
   - `MC_SERVER_PORT` (default `55916`)
   - `MINDCRAFT_UI_PORT` (default `18080`)
@@ -101,6 +99,14 @@ Most users can keep `.env` unchanged.
 - If you use non-Ollama providers, add API keys in `.env`:
   - key names: `https://raw.githubusercontent.com/mindcraft-bots/mindcraft/refs/heads/develop/keys.example.json`
   - syntax example: `OPENROUTER_API_KEY=sk-or-v1-...`
+
+## Grant Minecraft Admin
+
+Run once after startup:
+
+```shell
+docker compose exec minecraft rcon-cli op <your_minecraft_username>
+```
 
 ## Customize Bots
 
