@@ -54,6 +54,33 @@ Confirmed on this machine from `nvidia-smi`:
 - Keep one heavier quality fallback (`mistral-small`) for hard prompts, not as always-on default.
 - Include one clear vision-capable option (`gemma3:4b`) for multimodal bots.
 
+## Andy-4 tag guidance (Mindcraft-tuned models)
+
+Use `Sweaterdog/Andy-4` tags like this on this machine (RTX 5070 Laptop 8GB VRAM):
+
+1. `andy-4:latest` (4.9GB)
+- Best first choice for normal Mindcraft runs.
+- Better behavior quality than the micro variants, while still fitting this GPU class.
+
+2. `andy-4:q3_k_m` (4.0GB)
+- Use when VRAM pressure is high or you want lower latency.
+- Good fallback if `latest` is too heavy in multi-service workloads.
+
+3. `andy-4:q5_k_m` (5.7GB)
+- Use when you want a quality bump over `latest` and still fit in 8GB-class VRAM.
+- More likely to get tight on VRAM depending on desktop/background usage.
+
+4. `andy-4:q8_0` (8.5GB)
+- Generally too large for stable use on this 8GB laptop GPU.
+- Only try if you can dedicate nearly all VRAM and accept potential instability.
+
+5. `andy-4:F16` (16GB)
+- Not suitable for local GPU inference on this hardware.
+
+6. `andy-4:micro-*` (32K context, much smaller)
+- Use only when you need very low memory/latency.
+- Usually lower planning quality than full Andy-4 tags for long autonomous tasks.
+
 ## Suggested pull commands
 
 ```bash
@@ -64,6 +91,8 @@ ollama pull gemma3:4b
 ollama pull qwen2.5-coder:14b
 # optional heavy fallback
 ollama pull mistral-small:latest
+# mindcraft-tuned option (recommended start)
+ollama pull Sweaterdog/Andy-4:latest
 ```
 
 ## Operational notes
@@ -103,5 +132,6 @@ Practical conclusion:
   - https://ollama.com/library/qwen2.5-coder/tags
   - https://ollama.com/library/gemma3/tags
   - https://ollama.com/library/mistral-small/tags
+  - https://ollama.com/Sweaterdog/Andy-4/tags
 - Ollama GPU support docs:
   - https://docs.ollama.com/gpu
