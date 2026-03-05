@@ -90,12 +90,10 @@ Important runtime context:
 Profiles use:
 - Main model = profile.model
 - Coding/tool model = profile.code_model
-- Embedding model = profile.embedding
 
 Current defaults:
 - model: Sweaterdog/Andy-4:latest
 - code_model: qwen2.5-coder:7b
-- embedding: embeddinggemma
 
 Please read these links directly and base recommendations on them:
 - https://ollama.com/Sweaterdog/Andy-4
@@ -104,30 +102,24 @@ Please read these links directly and base recommendations on them:
 - https://ollama.com/search?q=coder
 
 Task:
-1) Recommend 3 profile sets for my hardware:
-   - recommended (balanced default)
-   - fallback_light (faster / lower memory)
-   - fallback_quality (better quality / heavier)
-2) For each set, provide:
-   - exact Ollama tag for model
-   - exact Ollama tag for code_model
-   - exact Ollama tag for embedding
-   - short reason with expected resource impact
-3) Avoid recommendations likely unstable for my VRAM/RAM.
-4) Keep embeddinggemma unless you have a strong reason to change it.
-5) Output exact `ollama pull` commands for all recommended tags.
-6) Output final JSON ready to paste into both `profiles/bot_1.json` and `profiles/bot_2.json`.
+Recommend exactly two Ollama model tags for my hardware:
+1) one tag for `model` (main bot model)
+2) one tag for `code_model` (coding/tool model)
+
+Keep recommendations practical for my VRAM/RAM and this multi-service setup.
 ```
 
 ## 3) Apply The Result
 
-Pick one recommended set and update:
+Update:
 
 - `profiles/bot_1.json`
 - `profiles/bot_2.json`
+- `docker-compose.yml` (`ollama-pull` service, `MODELS="..."`)
 
-Replace only these fields unless you intentionally change more:
+Replace only these model names:
 
 - `model.model`
 - `code_model.model`
-- `embedding.model`
+
+Keep `embeddinggemma` unchanged unless you intentionally want a different embedding model.
