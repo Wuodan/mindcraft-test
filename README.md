@@ -1,27 +1,33 @@
 # mindcraft-test
 
-Small user-focused demo setup for `mindcraft`:
-- Minecraft server in Docker (Paper + Dynmap)
-- Ollama in Docker for local LLM inference
+Small user-focused demo setup for [Mindcraft](https://github.com/mindcraft-bots/mindcraft):
+- Minecraft server in Docker ([PaperMC](https://papermc.io/) + [Dynmap plugin](https://www.curseforge.com/minecraft/bukkit-plugins/dynmap))
+- [Ollama](https://github.com/ollama/ollama) in [Docker](https://www.docker.com/) for local LLM inference
 - 2 bot profiles running through upstream `mindcraft`
 
 ## Quickstart
 
 1. Copy env template:
-
-```bash
-cp .env.example .env
-```
+   
+   ```bash
+   cp .env.example .env
+   ```
+   
+   > **Hotfix**  
+   > While [mindcraft issue #728](https://github.com/mindcraft-bots/mindcraft/issues/728) is still open, use this in the `.env` file:
+   > ```text
+   > MINDCRAFT_REPO=https://github.com/Wuodan/mindcraft.git
+   > MINDCRAFT_REF=fix/728-docker-apply-patches
+   > ```
 
 2. Start (pick one):
-- CPU only:
-  - `docker compose up -d`
-- NVIDIA GPU:
-  - `docker compose -f docker-compose.yml -f docker-compose.nvidia.yml up -d`
-- AMD GPU (ROCm host):
-  - `docker compose -f docker-compose.yml -f docker-compose.amd.yml up -d`
-
-The tracked `bots/bot_or_1` and `bots/bot_or_2` folders already exist (`.keep` files), so no manual folder creation is needed.
+  
+   - CPU only:
+     - `docker compose up -d`
+   - NVIDIA GPU:
+     - `docker compose -f docker-compose.yml -f docker-compose.nvidia.yml up -d`
+   - AMD GPU:
+     - `docker compose -f docker-compose.yml -f docker-compose.amd.yml up -d`
 
 ## Optional `.env` changes
 
