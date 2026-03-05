@@ -83,7 +83,7 @@ Use `Sweaterdog/Andy-4` tags like this on this machine (RTX 5070 Laptop 8GB VRAM
 
 ## Suggested pull commands
 
-```bash
+```shell
 ollama pull qwen3:4b-instruct
 ollama pull qwen3:8b
 ollama pull qwen2.5-coder:7b

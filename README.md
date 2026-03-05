@@ -9,7 +9,7 @@ Small user-focused demo setup for [Mindcraft](https://github.com/mindcraft-bots/
 
 1. Copy env template:
    
-   ```bash
+   ```shell
    cp .env.example .env
    ```
    
@@ -22,12 +22,18 @@ Small user-focused demo setup for [Mindcraft](https://github.com/mindcraft-bots/
 
 2. Start (pick one):
   
-   - CPU only:
-     - `docker compose up -d`
-   - NVIDIA GPU:
-     - `docker compose -f docker-compose.yml -f docker-compose.nvidia.yml up -d`
-   - AMD GPU:
-     - `docker compose -f docker-compose.yml -f docker-compose.amd.yml up -d`
+   - CPU only:  
+     ```shell
+     docker compose up -d
+     ```
+   - NVIDIA GPU:  
+     ```shell
+     docker compose -f docker-compose.yml -f docker-compose.nvidia.yml up -d
+     ```
+   - AMD GPU:  
+     ```shell
+     docker compose -f docker-compose.yml -f docker-compose.amd.yml up -d
+     ```
 
 ## Optional `.env` changes
 
@@ -67,7 +73,7 @@ Extend that JSON object to override more settings (for example `max_messages`, `
 
 ## Cleanup
 
-```bash
+```shell
 # Stop and remove project containers + network
 docker compose down
 
@@ -79,15 +85,20 @@ docker builder prune -f
 ```
 
 Remove data of bots:
-```bash
+```shell
 rm -rf bots/*/*
 ```
 
-To truly remove everything:
+Remove Minecraft server data (the world):
+```shell
+# WARNING: this deletes Minecraft world dataa.
+docker compose down -v minecraft
+```
 
-```bash
-# Also remove project volumes.
-# WARNING: this deletes Minecraft world data AND Ollama model data.
+Remove Ollama models:
+
+```shell
+# WARNING: this deletes Ollama model data.
 # Next startup will need to re-download models (can take a long time).
-docker compose down -v
+docker compose down -v ollama
 ```
