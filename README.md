@@ -70,6 +70,11 @@ docker image rm mindcraft-bot:local
 docker builder prune -f
 ```
 
+Remove data of bots:
+```bash
+rm -rf bots/*/*
+```
+
 To truly remove everything:
 
 ```bash
