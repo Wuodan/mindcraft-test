@@ -49,8 +49,16 @@ services:
         }
     volumes:
       - ./keys.json:/app/keys.json
-      - ./profiles:/app/profiles
-      - ./bots:/app/bots
+      - ./bots/bot_or_1:/app/bots/bot_or_1
+      - ./bots/bot_or_2:/app/bots/bot_or_2
+      - ./bots/bot_or_3:/app/bots/bot_or_3
+      - ./bots/bot_or_4:/app/bots/bot_or_4
+      - ./bots/bot_or_5:/app/bots/bot_or_5
+      - ./profiles/bot_or_1.json:/app/profiles/bot_or_1.json
+      - ./profiles/bot_or_2.json:/app/profiles/bot_or_2.json
+      - ./profiles/bot_or_3.json:/app/profiles/bot_or_3.json
+      - ./profiles/bot_or_4.json:/app/profiles/bot_or_4.json
+      - ./profiles/bot_or_5.json:/app/profiles/bot_or_5.json
     ports:
       - "8080:8080"
 
