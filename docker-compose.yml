@@ -9,6 +9,9 @@ services:
       VERSION: "1.21.6"
       ONLINE_MODE: "FALSE"
       SERVER_PORT: "${MC_SERVER_PORT:-55916}"
+      # For pre-filling bot inventory for tasks
+      ENABLE_COMMAND_BLOCK: "true"
+      # DynMap plugin
       PLUGINS: "https://www.curseforge.com/api/v1/mods/31620/files/7460127/download"
       # SEED to spawn at a village (from https://beebom.com/best-minecraft-seeds/ -> 2. Three Villages and a Cherry Grove)
       SEED: "5348024562502568"
@@ -81,9 +84,9 @@ services:
       "node",
       "main.js",
       "--task_path",
-      "tasks/basic/single_agent.json",
+      "tasks/construction_tasks/custom/pyramid.json",
       "--task_id",
-      "gather_oak_logs"]
+      "pyramid"]
     env_file:
       - .env
     environment:
@@ -93,7 +96,8 @@ services:
           "port": ${MC_SERVER_PORT:-55916},
           "auto_open_ui": false,
           "profiles": [
-            "./profiles/bot_1.json"
+            "./profiles/bot_1.json",
+            "./profiles/bot_2.json"
           ],
           "init_message": "${INIT_MESSAGE:-Respond with hello world and your name}",
           "chat_ingame": true,
