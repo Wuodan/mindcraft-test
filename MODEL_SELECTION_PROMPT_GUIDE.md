@@ -92,8 +92,8 @@ Profiles use:
 - Coding/tool model = profile.code_model
 
 Current defaults:
-- model: Sweaterdog/Andy-4:latest
-- code_model: qwen2.5-coder:7b
+- model: sweaterdog/andy-4:micro-q5_k_m
+- code_model: qwen2.5-coder:3b
 
 Please read these links directly and base recommendations on them:
 - https://ollama.com/Sweaterdog/Andy-4

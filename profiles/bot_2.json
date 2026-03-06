@@ -2,12 +2,12 @@
     "name": "bot_2",
     "model": {
         "api": "ollama",
-        "model": "Sweaterdog/Andy-4:latest",
+        "model": "sweaterdog/andy-4:micro-q5_k_m",
         "url": "http://ollama:11434"
     },
     "code_model": {
         "api": "ollama",
-        "model": "qwen2.5-coder:7b",
+        "model": "qwen2.5-coder:3b",
         "url": "http://ollama:11434"
     },
     "embedding": {
